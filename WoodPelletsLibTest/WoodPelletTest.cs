@@ -26,8 +26,12 @@ namespace WoodPelletsLibTest
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => woodPelletQualityNotGood2.ValidateQuality());
         }
 
+
+        //Tester positive grænseværdier på Quality med DataRows
         [TestMethod()]
         [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(4)]
         [DataRow(5)]
         public void ValidateQualitiesTest(int quality)
         {
@@ -35,6 +39,7 @@ namespace WoodPelletsLibTest
             woodPellet.ValidateQuality();
         }
 
+        //Tester negative grænseværdier på Quality med DataRows
         [TestMethod()]
         [DataRow(0)]
         [DataRow(6)]
