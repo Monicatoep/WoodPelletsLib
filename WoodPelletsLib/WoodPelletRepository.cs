@@ -32,6 +32,7 @@ namespace WoodPelletsLib
 
         public IEnumerable<WoodPellet?> GetAll()
         {
+            //Copy constructor to make copy of the original repo. 
             return new List<WoodPellet>(_woodPellets);
         }
 
