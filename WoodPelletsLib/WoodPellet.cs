@@ -34,9 +34,7 @@
             ValidatePrice();
             ValidateQuality();
         }
-
-
-
-
     }
+
+
 }
