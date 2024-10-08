@@ -7,11 +7,6 @@
         public int Price { get; set; }
         public int Quality { get; set; }
 
-        public override string ToString()
-        {
-            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Brand)}={Brand}, {nameof(Price)}={Price.ToString()}, {nameof(Quality)}={Quality.ToString()}}}";
-        }
-
         public void ValidateBrand()
         {
             if (Brand == null) throw new ArgumentNullException("Brand is null");

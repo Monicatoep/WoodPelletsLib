@@ -32,11 +32,7 @@ namespace WoodPelletsLib
 
         public IEnumerable<WoodPellet?> GetAll()
         {
-            if (_woodPellets == null)
-            {
-                return null;
-            }
-            return _woodPellets;
+            return new List<WoodPellet>(_woodPellets);
         }
 
         public WoodPellet? GetById(int id)
