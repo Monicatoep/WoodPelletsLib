@@ -29,6 +29,11 @@
             ValidatePrice();
             ValidateQuality();
         }
+
+        public override string ToString()
+        {
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Brand)}={Brand}, {nameof(Price)}={Price.ToString()}, {nameof(Quality)}={Quality.ToString()}}}";
+        }
     }
 
 
