@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -30,10 +31,51 @@ namespace WoodPelletsLib
             return woodPellet;
         }
 
-        public IEnumerable<WoodPellet?> GetAll()
+        public IEnumerable<WoodPellet?> GetAll(string? brand = null, string? quality = null, string? orderBy = null)
         {
-            //Copy constructor to make copy of the original repo. 
-            return new List<WoodPellet>(_woodPellets);
+            IEnumerable<WoodPellet> result = new List<WoodPellet>(_woodPellets);
+
+            if (brand != null)
+            {
+                result = result.Where(m => m.Brand.Contains(brand));
+            }
+
+            if (quality != null)
+            {
+                result = result.Where(m => m.Quality >= int.Parse(quality));
+            }
+
+            if (orderBy != null)
+            {
+                orderBy = orderBy.ToLower();
+                switch (orderBy)
+                {
+                    case "brand":
+                    case "brand_asc":
+                        result = result.OrderBy(m => m.Brand);
+                        break;
+                    case "brand_desc":
+                        result = result.OrderByDescending(m => m.Brand);
+                        break;
+                    case "price":
+                    case "price_asc":
+                        result = result.OrderBy(m => m.Price);
+                        break;
+                    case "price_desc":
+                        result = result.OrderByDescending(m => m.Price);
+                        break;
+                    case "quality":
+                    case "quality_asc":
+                        result = result.OrderBy(m => m.Quality);
+                        break;
+                    case "quality_desc":
+                        result = result.OrderByDescending(m => m.Quality);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return result;
         }
 
         public WoodPellet? GetById(int id)
@@ -51,6 +93,17 @@ namespace WoodPelletsLib
                 woodPelletToUpdate.Price = woodPellet.Price;
                 woodPelletToUpdate.Quality = woodPellet.Quality;
                 return woodPelletToUpdate;
+            }
+            return null;
+        }
+
+        public WoodPellet? Remove(int id)
+        {
+            WoodPellet? woodPelletToRemove = GetById(id);
+            if (woodPelletToRemove != null)
+            {
+                _woodPellets.Remove(woodPelletToRemove);
+                return woodPelletToRemove;
             }
             return null;
         }
